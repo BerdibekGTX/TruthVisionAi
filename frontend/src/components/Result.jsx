@@ -12,7 +12,6 @@ function Result({ result, onReset }) {
   const confidenceValue = result.confidence * 100;
   const confidencePercentage = confidenceValue.toFixed(1);
   const isVideo = result.input_type === 'video';
-  const hasGrok = !!result.grok;
 
   const getReliability = () => {
     if (confidenceValue > 99.9) {
@@ -80,20 +79,6 @@ function Result({ result, onReset }) {
           </div>
         </div>
       </div>
-
-      {hasGrok && (
-        <div className="w-full max-w-md rounded-xl border border-[#c7d2fe] bg-[#eef2ff] p-4 text-left mb-6">
-          <p className="font-bold text-[#3730a3]">Grok cross-check</p>
-          <p className="text-sm mt-1 text-[#4338ca]">
-            Label: {result.grok.label} ({(result.grok.confidence * 100).toFixed(1)}%)
-          </p>
-          {result.ensemble && (
-            <p className="text-sm mt-1 text-[#4338ca]">
-              Ensemble: {result.ensemble.label} ({(result.ensemble.confidence * 100).toFixed(1)}%), agreement: {result.ensemble.agreement ? 'yes' : 'no'}
-            </p>
-          )}
-        </div>
-      )}
 
       <div className={`w-full max-w-md rounded-xl border p-4 text-left mb-8 ${reliability.style}`}>
         <p className="font-bold">{reliability.title}</p>

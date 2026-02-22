@@ -7,8 +7,6 @@ import os
 import tempfile
 import cv2
 
-from grok_detector import analyze_image_with_grok
-
 # Путь к предварительно обученной модели на Hugging Face
 MODEL_PATH = "haywoodsloan/ai-image-detector-dev-deploy"
 
@@ -102,28 +100,6 @@ def analyze_image(image_bytes: bytes) -> dict:
         result = _classify_pil_image(image)
         result["input_type"] = "image"
         result["provider"] = "main_model"
-
-        # Optional Grok cross-check (enabled only when XAI_API_KEY is set).
-        grok_api_key = os.getenv("XAI_API_KEY")
-        if grok_api_key:
-            try:
-                grok_result = analyze_image_with_grok(image_bytes)
-                result["grok"] = grok_result
-
-                ensemble_ai = (result["ai_probability"] + grok_result["ai_probability"]) / 2.0
-                ensemble_real = 1.0 - ensemble_ai
-                ensemble_is_ai = ensemble_ai >= 0.5
-
-                result["ensemble"] = {
-                    "is_ai": ensemble_is_ai,
-                    "ai_probability": ensemble_ai,
-                    "real_probability": ensemble_real,
-                    "confidence": max(ensemble_ai, ensemble_real),
-                    "label": "AI Generated" if ensemble_is_ai else "Real Image",
-                    "agreement": result["is_ai"] == grok_result["is_ai"],
-                }
-            except Exception as grok_error:
-                result["grok_error"] = str(grok_error)
 
         return result
 

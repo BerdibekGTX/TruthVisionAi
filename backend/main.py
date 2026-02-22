@@ -2,6 +2,7 @@
 from fastapi import FastAPI, File, UploadFile, HTTPException, status
 from fastapi.middleware.cors import CORSMiddleware
 from contextlib import asynccontextmanager
+from backend.detector import load_model, analyze_image, analyze_video
 import uvicorn
 
 # Импортируем функции из нашего модуля detector
