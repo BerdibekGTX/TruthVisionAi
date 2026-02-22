@@ -1,0 +1,29 @@
+/* frontend/src/index.css */
+
+/*
+  Импортируем базовые стили, компоненты и утилиты Tailwind CSS.
+  Vite + PostCSS обработают эти директивы и сгенерируют итоговый CSS-файл.
+*/
+@import url('https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@400;500;600;700;800&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body {
+  font-family: 'Bricolage Grotesque', sans-serif;
+  background:
+    radial-gradient(circle at 6% 8%, rgba(125, 211, 252, 0.28), transparent 24%),
+    radial-gradient(circle at 70% 90%, rgba(191, 219, 254, 0.45), transparent 35%),
+    radial-gradient(circle at 92% 20%, rgba(59, 130, 246, 0.16), transparent 25%),
+    linear-gradient(180deg, #f8fafc 0%, #eef4ff 100%);
+  background-color: #f8fafc;
+  color: #111827;
+  min-height: 100vh;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+h1, h2, h3, .font-display {
+  font-family: 'Bricolage Grotesque', sans-serif;
+}

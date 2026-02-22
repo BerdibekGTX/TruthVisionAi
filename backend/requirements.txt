@@ -1,0 +1,9 @@
+fastapi
+uvicorn
+python-multipart
+Pillow
+transformers
+torch
+accelerate
+opencv-python-headless
+requests
